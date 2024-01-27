@@ -63,3 +63,11 @@ a {
   font-size: 0.8rem;
   font-weight: 400;
 }
+.menu a i {
+  font-size: 1.2rem;
+}
+.main--container {
+  width: 100%;
+  padding: 1.7rem;
+  background: #f5f5f5;
+}
