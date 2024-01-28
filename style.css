@@ -68,7 +68,7 @@ a {
 }
 .main--content {
   position: relative;
-  width: 100%;
+  width: 100vh;
   height: 100vh;
   padding: 2rem;
   background: #c6c3c3;
@@ -129,6 +129,7 @@ a {
   background: #fff;
   padding: 2rem;
   border-radius: 10px;
+  margin-top: 20px;
 }
 .card--wrap {
   display: flex;
@@ -206,4 +207,53 @@ a {
 }
 #lendIcon {
   background: rgb(246, 132, 132);
+}
+
+.tabular--wrap {
+  background: #fff;
+  margin-top: 20px;
+  border-radius: 10px;
+  padding: 2rem;
+}
+.table--container {
+  width: 100%;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+table thead {
+  font-size: 1.2rem;
+  background: rgba(114, 99, 186, 255);
+  color: #fff;
+  text-align: left;
+  font-weight: 500;
+}
+th {
+  text-align: left;
+  padding: 15px;
+}
+tbody {
+  background: rgb(210, 207, 207);
+}
+td {
+  padding: 15px;
+  font-size: 14px;
+}
+tr:nth-child(even) {
+  background: #e1dede;
+}
+tfoot {
+  background: rgba(114, 99, 186, 255);
+  font-weight: bold;
+  color: #fff;
+}
+tfoot td {
+  padding: 15px;
+}
+.table--container button {
+  background: rgba(114, 99, 186, 255);
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
 }
