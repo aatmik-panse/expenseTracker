@@ -44,7 +44,7 @@ function updateDashboardTotals() {
   tableFooter.textContent = `Total: Rs.${totalAmount.toFixed(2)}`;
 }
 
-// Function to get today's date in the format: DD/MM/YYYY
+// Get today's date in the format: DD/MM/YYYY
 function getFormattedDate() {
   const today = new Date();
   const dd = String(today.getDate()).padStart(2, "0");
@@ -53,7 +53,7 @@ function getFormattedDate() {
   return `${dd}/${mm}/${yyyy}`;
 }
 
-// Function to render transaction table
+// Render transaction table
 function renderTransactions() {
   const tableBody = document.querySelector("tbody");
   tableBody.innerHTML = "";
