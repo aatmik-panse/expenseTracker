@@ -17,10 +17,6 @@ function updateDashboardTotals() {
     .filter((transaction) => transaction.type === "Lend")
     .reduce((sum, transaction) => sum + transaction.amount, 0);
 
-  document.getElementById("lendAmount").textContent = `Rs.${lendAmount.toFixed(
-    2
-  )}`;
-
   document.getElementById(
     "creditAmount"
   ).textContent = `Rs.${creditAmount.toFixed(2)}`;
@@ -82,17 +78,30 @@ function hideAddTransactionForm() {
 }
 
 function addTransaction() {
+  const creditAmount = transactions
+    .filter((transaction) => transaction.type === "Credit")
+    .reduce((sum, transaction) => sum + transaction.amount, 0);
+
+  const debitAmount = transactions
+    .filter((transaction) => transaction.type === "Debit")
+    .reduce((sum, transaction) => sum + transaction.amount, 0);
+
+  const lendAmount = transactions
+    .filter((transaction) => transaction.type === "Lend")
+    .reduce((sum, transaction) => sum + transaction.amount, 0);
+
+  const totalAmount = creditAmount - debitAmount - lendAmount;
+
   const type = document.getElementById("type").value;
   const amountValue = document.getElementById("amount").value;
   const amount = parseFloat(amountValue);
   const today = getFormattedDate();
-  if (
-    amountValue > document.getElementById("totalAmount") &&
-    type === "Debit"
-  ) {
+
+  if ((amount > totalAmount && type === "Debit") || type === "Lend") {
     alert("Insufficient Balance");
     return;
   }
+
   if (!type || isNaN(amount) || amount <= 0) {
     hideAddTransactionForm();
     return;
@@ -104,10 +113,10 @@ function addTransaction() {
     amount,
     date: today,
   };
+
   transactions.push(newTransaction);
   saveTransactionsToLocalStorage();
   renderTransactions();
-
   hideAddTransactionForm();
 }
 
