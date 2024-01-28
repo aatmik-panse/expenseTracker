@@ -103,6 +103,7 @@ function addTransaction() {
   }
 
   if (!type || isNaN(amount) || amount <= 0) {
+    alert("Invalid Input");
     hideAddTransactionForm();
     return;
   }
