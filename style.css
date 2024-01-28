@@ -264,8 +264,8 @@ tfoot td {
   padding: 15px;
 }
 .table--container button {
-  background: rgba(114, 99, 186, 255);
-  color: #fff;
+  background: transparent;
+  color: blue;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
 }
@@ -280,38 +280,48 @@ tfoot td {
   border-radius: 50%;
   border: rgb(85, 85, 85) 5px solid;
 }
-#addTransactionForm {
+.addTransactionForm {
   display: none;
-  max-width: 300px;
-  margin: 20px auto;
+  width: 400px;
+  margin: 20px;
   z-index: 1;
+  border-radius: 10px;
 }
 
-#addTransactionForm form {
+.addTransactionForm form {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
+  padding: 20px;
 }
 
-#addTransactionForm label {
-  margin-bottom: 5px;
-}
-
-#addTransactionForm select,
-input {
+.addTransactionForm label {
+  font-size: 1.2rem;
+  background: lightgray;
+  color: rgba(114, 99, 186, 255);
   padding: 8px;
-  margin-bottom: 10px;
+  border-radius: 10px;
 }
 
-#addTransactionForm button {
+.addTransactionForm select,
+input {
+  padding: 10px;
+  margin: 10px 0;
+  background: rgb(235, 233, 233);
+  border-radius: 10px;
+}
+
+.addTransactionForm button {
+  align-items: center;
   padding: 10px;
   background-color: #4caf50;
   color: white;
   border: none;
   cursor: pointer;
+  border-radius: 10px;
 }
 
-#addTransactionForm button:hover {
+.addTransactionForm button:hover {
   background-color: #45a049;
 }

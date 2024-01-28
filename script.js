@@ -93,7 +93,7 @@ function addTransaction() {
   const today = getFormattedDate();
 
   if (!type || isNaN(amount) || amount <= 0) {
-    alert("Please fill in all fields with valid data.");
+    hideAddTransactionForm();
     return;
   }
 
