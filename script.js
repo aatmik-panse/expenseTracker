@@ -1,27 +1,44 @@
-let creditAmount = 0.0;
-let totalAmount = 0.0;
-let debitAmount = 0.0;
-let lendAmount = 0.0;
+let transactions = [
+  { id: 1, type: "Credit", amount: 1000.0, date: getFormattedDate() },
+  { id: 2, type: "Debit", amount: 100.0, date: getFormattedDate() },
+];
 
-// Update credit card data
-document.getElementById(
-  "creditAmount"
-).textContent = `Rs.${creditAmount.toFixed(2)}`;
+// Function to update dashboard totals
+function updateDashboardTotals() {
+  let creditAmount = transactions
+    .filter((transaction) => transaction.type === "Credit")
+    .reduce((sum, transaction) => sum + transaction.amount, 0);
 
-// Update total balance card data
-document.getElementById("totalAmount").textContent = `Rs.${totalAmount.toFixed(
-  2
-)}`;
+  let debitAmount = transactions
+    .filter((transaction) => transaction.type === "Debit")
+    .reduce((sum, transaction) => sum + transaction.amount, 0);
 
-// Update debit card data
-document.getElementById("debitAmount").textContent = `Rs.${debitAmount.toFixed(
-  2
-)}`;
+  let lendAmount = transactions
+    .filter((transaction) => transaction.type === "Lend")
+    .reduce((sum, transaction) => sum + transaction.amount, 0);
 
-// Update lend card data
-document.getElementById("lendAmount").textContent = `Rs.${lendAmount.toFixed(
-  2
-)}`;
+  // Assuming you want to display lend amount separately on the dashboard
+  document.getElementById("lendAmount").textContent = `Rs.${lendAmount.toFixed(
+    2
+  )}`;
+
+  // Update the credit, debit, and total balance on the dashboard
+  document.getElementById(
+    "creditAmount"
+  ).textContent = `Rs.${creditAmount.toFixed(2)}`;
+  document.getElementById(
+    "debitAmount"
+  ).textContent = `Rs.${debitAmount.toFixed(2)}`;
+
+  let totalAmount = creditAmount - debitAmount - lendAmount;
+  document.getElementById(
+    "totalAmount"
+  ).textContent = `Rs.${totalAmount.toFixed(2)}`;
+
+  // Update total in the table footer
+  const tableFooter = document.querySelector("tfoot td");
+  tableFooter.textContent = `Total: Rs.${totalAmount.toFixed(2)}`;
+}
 
 // Function to get today's date in the format: DD/MM/YYYY
 function getFormattedDate() {
@@ -31,12 +48,6 @@ function getFormattedDate() {
   const yyyy = today.getFullYear();
   return `${dd}/${mm}/${yyyy}`;
 }
-
-let transactions = [
-  { id: 1, type: "Credit", amount: 1000.0, date: getFormattedDate() },
-  { id: 2, type: "Debit", amount: 100.0, date: getFormattedDate() },
-  //   { id: 3, type: "Credit", amount: 1000.0, date: getFormattedDate() },
-];
 
 // Function to render transaction table
 function renderTransactions() {
@@ -50,30 +61,61 @@ function renderTransactions() {
       <td>${transaction.type}</td>
       <td>Rs.${transaction.amount.toFixed(2)}</td>
       <td>${transaction.date}</td>
-      <td><a href="#" class="btn--edit" onclick="editTransaction(${
+      <td><button class="btn--edit" onclick="editTransaction(${
         transaction.id
-      })">Edit</a></td>
+      })">Edit</button></td>
     `;
-
     tableBody.appendChild(row);
   });
-
-  // Update total in the footer
-  const tableFooter = document.querySelector("tfoot td");
-  const totalAmount = transactions.reduce(
-    (total, transaction) =>
-      transaction.type === "Credit"
-        ? total + transaction.amount
-        : total - transaction.amount,
-    0
-  );
-  tableFooter.textContent = `Total: Rs. ${totalAmount.toFixed(2)}`;
+  // Update the totals whenever transactions are rendered
+  updateDashboardTotals();
 }
-
-// Function to handle editing transactions
-function editTransaction(transactionId) {
-  console.log(`Editing transaction with ID: ${transactionId}`);
-}
-
-// Call the renderTransactions function to initialize the table
+// Initial call to render transactions
 renderTransactions();
+
+// Function to show the add transaction form
+function showAddTransactionForm() {
+  const formContainer = document.getElementById("addTransactionForm"); // Corrected method
+  formContainer.style.display = "block";
+}
+
+// Function to hide the add transaction form
+function hideAddTransactionForm() {
+  const formContainer = document.getElementById("addTransactionForm"); // Corrected method
+  formContainer.style.display = "none";
+}
+
+// Function to add a new transaction
+function addTransaction() {
+  const type = document.getElementById("type").value;
+  const amountValue = document.getElementById("amount").value;
+  const amount = parseFloat(amountValue);
+  const today = getFormattedDate();
+
+  if (!type || isNaN(amount) || amount <= 0) {
+    alert("Please fill in all fields with valid data.");
+    return;
+  }
+
+  const newTransaction = {
+    id: transactions.length + 1,
+    type,
+    amount,
+    date: today,
+  };
+  transactions.push(newTransaction);
+  renderTransactions(); // This will also update the dashboard totals
+
+  // Hide the form after submitting
+  hideAddTransactionForm();
+}
+
+// Add event listeners
+document
+  .getElementById("add")
+  .addEventListener("click", showAddTransactionForm);
+document.getElementById("submit").addEventListener("click", addTransaction);
+// Placeholder for edit transaction functionality
+function editTransaction(id) {
+  console.log(`Edit transaction with id ${id} is not implemented yet.`);
+}

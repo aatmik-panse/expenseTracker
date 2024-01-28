@@ -40,7 +40,9 @@
         </li>
       </ui>
     </div>
-    <i class="fa-solid fa-circle-plus" id="add"></i>
+    <button id="addButton" onclick="showAddTransactionForm()">
+      <i class="fa-solid fa-circle-plus" id="add"></i>
+    </button>
 
     <div class="main--content">
       <div class="header--wrap">
@@ -62,7 +64,7 @@
             <div class="card--header">
               <div class="amount">
                 <span class="title">Credit</span>
-                <span class="value" id="creditAmount">Rs.40000.00</span>
+                <span class="value" id="creditAmount"></span>
               </div>
               <i class="fa fa-inr icon"></i>
             </div>
@@ -72,7 +74,7 @@
             <div class="card--header">
               <div class="amount">
                 <span class="title">Total Balance</span>
-                <span class="value" id="totalAmount">Rs.38000.00</span>
+                <span class="value" id="totalAmount"></span>
               </div>
               <i class="fa fa-university icon" id="totalIcon"></i>
             </div>
@@ -82,7 +84,7 @@
             <div class="card--header">
               <div class="amount">
                 <span class="title">Debit</span>
-                <span class="value" id="debitAmount">Rs.2000.00</span>
+                <span class="value" id="debitAmount"></span>
               </div>
               <i class="fa fa-wallet icon" id="debitIcon"></i>
             </div>
@@ -92,7 +94,7 @@
             <div class="card--header">
               <div class="amount">
                 <span class="title">Lend</span>
-                <span class="value" id="lendAmount">Rs.100.00</span>
+                <span class="value" id="lendAmount"></span>
               </div>
               <i class="fa fa-vault icon" id="lendIcon"></i>
             </div>
@@ -145,6 +147,21 @@
           </table>
         </div>
       </div>
+    </div>
+    <div id="addTransactionForm" style="display: none">
+      <form>
+        <label for="type">Transaction Type:</label>
+        <select id="type">
+          <option value="Credit">Credit</option>
+          <option value="Debit">Debit</option>
+          <option value="Lend">Lend</option>
+        </select>
+
+        <label for="amount">Amount (Rs.):</label>
+        <input type="number" id="amount" placeholder="Enter amount" required />
+
+        <button type="button" id="submit">Submit</button>
+      </form>
     </div>
   </body>
   <script src="script.js" defer></script>

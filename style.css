@@ -280,3 +280,38 @@ tfoot td {
   border-radius: 50%;
   border: rgb(85, 85, 85) 5px solid;
 }
+#addTransactionForm {
+  display: none;
+  max-width: 300px;
+  margin: 20px auto;
+  z-index: 1;
+}
+
+#addTransactionForm form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#addTransactionForm label {
+  margin-bottom: 5px;
+}
+
+#addTransactionForm select,
+input {
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+#addTransactionForm button {
+  padding: 10px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+#addTransactionForm button:hover {
+  background-color: #45a049;
+}
