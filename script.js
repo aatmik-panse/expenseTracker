@@ -1,9 +1,11 @@
-let transactions = [
-  { id: 1, type: "Credit", amount: 1000.0, date: getFormattedDate() },
-  { id: 2, type: "Debit", amount: 100.0, date: getFormattedDate() },
-];
+let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
 
-// Function to update dashboard totals
+//Save transactions to local storage
+function saveTransactionsToLocalStorage() {
+  localStorage.setItem("transactions", JSON.stringify(transactions));
+}
+
+//Update dashboard totals
 function updateDashboardTotals() {
   let creditAmount = transactions
     .filter((transaction) => transaction.type === "Credit")
@@ -17,7 +19,6 @@ function updateDashboardTotals() {
     .filter((transaction) => transaction.type === "Lend")
     .reduce((sum, transaction) => sum + transaction.amount, 0);
 
-  // Assuming you want to display lend amount separately on the dashboard
   document.getElementById("lendAmount").textContent = `Rs.${lendAmount.toFixed(
     2
   )}`;
@@ -29,6 +30,9 @@ function updateDashboardTotals() {
   document.getElementById(
     "debitAmount"
   ).textContent = `Rs.${debitAmount.toFixed(2)}`;
+  document.getElementById("lendAmount").textContent = `Rs.${lendAmount.toFixed(
+    2
+  )}`;
 
   let totalAmount = creditAmount - debitAmount - lendAmount;
   document.getElementById(
@@ -104,6 +108,7 @@ function addTransaction() {
     date: today,
   };
   transactions.push(newTransaction);
+  saveTransactionsToLocalStorage(); // Save to local storage
   renderTransactions(); // This will also update the dashboard totals
 
   // Hide the form after submitting
@@ -119,3 +124,4 @@ document.getElementById("submit").addEventListener("click", addTransaction);
 function editTransaction(id) {
   console.log(`Edit transaction with id ${id} is not implemented yet.`);
 }
+renderTransactions();
