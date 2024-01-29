@@ -67,7 +67,7 @@ function renderTransactions() {
       <td>${transaction.date}</td>
       <td><button class="btn--edit" onclick="editTransaction(${
         transaction.id
-      })">Edit</button></td>
+      })">Delete</button></td>
     `;
     tableBody.appendChild(row);
   });
@@ -95,7 +95,13 @@ function addTransaction() {
   const amountValue = document.getElementById("amount").value;
   const amount = parseFloat(amountValue);
   const today = getFormattedDate();
-
+  if (
+    amountValue > document.getElementById("totalAmount") &&
+    type === "Debit"
+  ) {
+    alert("Insufficient Balance");
+    return;
+  }
   if (!type || isNaN(amount) || amount <= 0) {
     hideAddTransactionForm();
     return;
