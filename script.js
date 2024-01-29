@@ -120,11 +120,14 @@ function editTransaction(id) {
   const index = transactions.findIndex((transaction) => transaction.id === id);
 
   if (index !== -1) {
-    transactions.splice(index, 1);
-    saveTransactionsToLocalStorage();
-    renderTransactions();
-  } else {
-    console.error(`Transaction with ID ${id} not found!`);
+    const confirmed = confirm(
+      "Are you sure you want to delete this transaction?"
+    );
+    if (confirmed) {
+      transactions.splice(index, 1);
+      saveTransactionsToLocalStorage();
+      renderTransactions();
+    }
   }
 }
 
