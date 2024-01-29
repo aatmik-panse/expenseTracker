@@ -117,7 +117,15 @@ document
 document.getElementById("submit").addEventListener("click", addTransaction);
 
 function editTransaction(id) {
-  console.log(`Edit transaction with id ${id} is not implemented yet.`);
+  const index = transactions.findIndex((transaction) => transaction.id === id);
+
+  if (index !== -1) {
+    transactions.splice(index, 1);
+    saveTransactionsToLocalStorage();
+    renderTransactions();
+  } else {
+    console.error(`Transaction with ID ${id} not found!`);
+  }
 }
 
 renderTransactions();
