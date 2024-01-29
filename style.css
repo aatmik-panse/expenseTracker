@@ -76,7 +76,7 @@ a {
   gap: 1rem;
 }
 .menu a i {
-  font-size: 1.2rem;
+  font-size: 3vw;
 }
 .main--content {
   position: relative;
@@ -272,9 +272,9 @@ tfoot td {
 #add {
   z-index: 1;
   position: fixed;
-  font-size: 5rem;
-  right: 50px;
-  bottom: 50px;
+  font-size: 6vw;
+  right: 8vw;
+  bottom: 5vh;
   color: rgb(130, 230, 251);
   background: #444141;
   border-radius: 50%;
@@ -324,4 +324,104 @@ input {
 
 .addTransactionForm button:hover {
   background-color: #45a049;
+}
+/* Media Query for devices with a maximum width of 768px */
+@media only screen and (max-width: 700px) {
+  .sidebar {
+    position: sticky;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 7.3vw;
+    height: 100vh;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: space-around;
+    justify-content: center;
+  }
+
+  .menu {
+    flex-direction: column;
+    height: auto;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .menu li {
+    padding: 0.5rem;
+  }
+
+  .menu a {
+    font-size: 1rem;
+    gap: 0.5rem;
+  }
+  .menu a i {
+    font-size: 3vw;
+  }
+
+  .main--content {
+    padding: 1rem;
+  }
+
+  .header--wrap {
+    padding: 10px;
+  }
+
+  .header--wrap img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .search--box {
+    height: 40px;
+  }
+
+  .credit--card,
+  .addTransactionForm {
+    width: 100%;
+  }
+
+  .addTransactionForm {
+    margin: 10px;
+  }
+  .tabular--wrap {
+    font-size: 3vh;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  table thead {
+    font-size: 3vw;
+    background: rgba(114, 99, 186, 255);
+    color: #fff;
+    text-align: left;
+    font-weight: 200;
+  }
+  th {
+    text-align: left;
+    padding: 1vw;
+  }
+  tbody {
+    background: rgb(210, 207, 207);
+  }
+  td {
+    padding: 1vw;
+    font-size: 2vw;
+  }
+  tr:nth-child(even) {
+    background: #e1dede;
+  }
+  tfoot {
+    background: rgba(114, 99, 186, 255);
+    font-weight: bold;
+    color: #fff;
+  }
+  tfoot td {
+    padding: 1.5vw;
+  }
+  button .btn--edit {
+    width: 1vw;
+  }
 }
